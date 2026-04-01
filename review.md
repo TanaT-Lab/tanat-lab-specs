@@ -1,36 +1,46 @@
-# Review specs
+# General Code Review Specification
 
-Goal: review implementations against the project's Constitution and scientific rigor.
+**Goal:** Verify that the code strictly meets the requirements and the project's Constitution. If it doesn't, reject it. Reviews must ensure scientific rigor, absolute code simplicity, and high maintainability.
 
-### 1. Architecture & Reuse
-- **Mixins:** Did the developer use `Cachable`, `Registrable`, or `CachableSettings` where applicable?
-- **Utils:** No "reinventing the wheel" if a utility exists in `tanat-utils` or in public standards.
-- **Store immutability:** Does any new code write to a physical store outside of a builder or a store mutation method? Reject if yes.
-- **Virtual context:** Is `weakref.finalize` used instead of `__del__` for virtual context cleanup? Is `_gc_state` a `list` updated in-place?
+## 1. Core Philosophy
 
-### 2. API & Developer Experience (DX)
-- **Signatures:** Are type hints strict and accurate? Check `-> Iterator[T]` on all `__iter__` / `keys()` / `values()` / `items()` generators.
-- **Docstrings:** Google style. First line is a concise one-liner. Public methods with non-obvious usage patterns must have `Examples::` blocks. No em dashes anywhere.
-- **Naming:** Does naming follow TanaT conventions? Check `id_column`, `start_column`, `end_column`, `time_column`, `entity_features`, `static_features`.
-- **Import placement:** Reject any PR with imports inside methods or functions. Top of file, PEP 8 order (stdlib > third-party > local).
-- **No parenthetical types in Args:** `param (list, optional):` style is banned. Use Python 3.10+ union types in the signature only.
+- **Strict Adherence:** Does it do exactly what the specifications ask? If NO, return to sender.
+- **Simplicity over Cleverness:** Code must be simple, readable, and easy to maintain. Reject any "clever" or overly complex code.
+- **No Noise:** Delete any useless internal comments, redundant documentation, or dead code.
+- **Do Not Reinvent the Wheel:** Always use standard Python libraries or existing project utilities (e.g., `tanat-utils`).
 
-### 3. Builder & Data Registration
-- **`features` normalisation:** Every `add_*` method must auto-convert `str` to `[str]`. Verify the pattern `features = [features] if isinstance(features, str) else list(features)` is present.
-- **`temporal_columns()` return type:** Must return `list[str]` (ordered), never a `frozenset` or unordered collection.
-- **Temporal dtype mismatch warning:** New builder subclasses must set `_TEMPORAL_SCHEMA_MAP` and inherit the warning from `_warn_temporal_dtype_mismatch`. Do not duplicate the warning logic.
+## 2. General Review Criteria
 
-### 4. Style Constraints
-- **Em dashes banned:** Zero occurrences of `—` in any `.py`, `.md`, or other file. Use ` - ` (space-hyphen-space) or rewrite the sentence.
-- **Arrow shorthand:** `None -> all` is acceptable in docstrings (Unicode `→` is also fine). Do not replace these.
+### Architecture & Code Quality
+- **Consistency & Patterns:** Maintain strict homogeneity across the library (matching argument names, method signatures, return structures, etc.).
+- **Reuse:** Leverage existing architectural patterns and mixins (e.g., `Cachable`, `Registrable`, and utilities from `tanat-utils`).
 
-### 5. Testing & Validation
-- **Functional focus:** Do tests mimic real usage?
-- **Snapshots:** Is `syrupy` used for complex outputs?
-- **Edge cases:** Check for empty sequences or single-entity trajectories.
+### Documentation & Developer Experience (DX)
+- **User Doc vs. Dev Doc:** Clear separation is required. 
+  - *User Doc:* Explain how to use it (always include `Examples::` blocks for non-obvious public methods).
+  - *Dev Doc:* Explain how it works internally.
+- **Standardization:** Use Google style docstrings. The first line must be a concise one-liner.
+- **Type Hints:** Must be strict, accurate, and use modern Python syntax in the signature. Do not use parenthetical types in docstrings.
 
-## Response Format
-For every review, provide:
-1. **Approval Status:** [✅ Approved] | [⚠️ Changes Required] | [❌ Rejected].
-2. **Critical Flaws:** List anything breaking the Constitution.
-3. **Suggestions:** Improvements for performance or DX.
+### Testing & Validation
+- **Functional Focus:** Tests must mimic real-world usage and validate exact specification requirements.
+- **Edge Cases:** Always check for edge cases (e.g., empty sequences, missing data).
+- **Snapshots:** Use tools like `syrupy` for validating complex data outputs.
+
+## 3. TanaT-Specific Strict Constraints
+*Any violation of these rules warrants an immediate request for changes.*
+- **Formatting:** Em dashes (`—`) are strictly banned everywhere. Use `:`,`-`, `;`, ....
+- **Imports:** Must be at the top of the file, following PEP 8 order. No imports inside methods or functions.
+- **Naming:** Follow project conventions strictly (e.g., `id_column`, `start_column`, `entity_features`).
+- **Builders:** 
+  - `features` inputs must gracefully handle single strings by auto-converting them to lists.
+  - Generative or temporal methods (e.g., `temporal_columns()`) must return ordered collections (`list[str]`), not sets.
+
+## 4. Required Review Output Format
+
+Every code review response must strictly follow this format:
+
+- **Status:** [✅ PASS / Approved] | [⚠️ Changes Required] | [❌ FAIL / Rejected]
+- **Missing Specs / Adherence:** List anything that deviates from or misses the original specifications.
+- **Code Cleanliness:** Provide suggestions to simplify the code, remove "clever" code, or improve readability.
+- **Doc & Test Check:** Note any missing user/dev docs, bloated/noisy comments, and missing test edge cases.
