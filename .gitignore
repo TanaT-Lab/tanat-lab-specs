@@ -1,0 +1,24 @@
+# =====================================================================
+# specs-template .gitignore
+# Ignore anything tied to the momentary execution of a task that is NOT
+# needed to track the project's progress. Everything versioned here must
+# contribute to the durable picture of the project (main + tasks).
+# =====================================================================
+
+# Intermediate exchange between orchestrator and atomic coders.
+# These are transient working files, NOT the durable task specs.
+# (any .exchange/ anywhere, incl. subrepos/*/tasks/.exchange/)
+.exchange/
+tasks/.exchange/
+
+# Logs
+logs/
+*.log
+
+# Local transient agent state
+.state/
+.tmp/
+*.swp
+
+# OS / editor
+.DS_Store
