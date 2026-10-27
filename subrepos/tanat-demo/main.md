@@ -91,13 +91,15 @@ Audio budget (measured on the previous mp3):
 
 ## Open points
 
-- **Cluster story (TASK-010).** `EditSequenceMetric` is unnormalized and
-  `n_clusters=4` gives sizes 55 / 7 / 1 / 1: the clusters just sort patients by
-  number of admissions (mean 2.7 vs 10, 10 and 20). Measured with
-  `normalize=True`: k=3 gives 24 / 22 / 18 (mean 1.4 / 2.9 / 8.5 admissions),
-  k=4 gives 22 / 18 / 16 / 8. A readmission-frequency story fits "Hospital
-  Readmission Patterns". To validate with the human.
+- **Cluster story (decided 2026-10-27, branch `fix/cluster-story`, not merged).**
+  The unnormalized `EditSequenceMetric` with `n_clusters=4` gave 55 / 7 / 1 / 1:
+  clusters only sorted patients by number of admissions. Now `normalize=True`
+  and `n_clusters=3`: 24 / 22 / 18 patients (mean 1.4 / 2.9 / 8.5 admissions), a
+  readmission-frequency story. The narration (TASK-010) must follow.
 - Hamming compares a single feature: `admission_type` (decided).
+- `5b` and `3a` outputs include TanaT's progress log (boxes with timings, so
+  not reproducible between runs). Consider silencing it for the audience (TASK-010).
+- Upstream issue for the `subset` bug: drafted, to post on `TanaT-Lab/TanaT`.
 
 ## Interfaces with other sub-repos
 
