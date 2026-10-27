@@ -26,7 +26,7 @@ kept locally and **not versioned**; durable findings go in `../main.md`.
 | TASK-008 | Player reads `outputs.json`; `config.js` keeps staging only | done (main @ e74fad8) | 005, 006 |
 | TASK-009 | GitHub Actions + Pages, CI on PRs | done (main @ b4691b2, site live) | 004, 005 |
 | TASK-010 | Rewrite `SCRIPT.md` in sections, 4m20 target, new API (incl. step 1 text) (orchestrator + human) | done (main @ e8a4ba9) | 005 |
-| TASK-011 | Generate audio + automatic intro note timings | in_progress (sonnet) | 007, 010 |
+| TASK-011 | Generate audio + automatic intro note timings | done (main @ d6f3c79, sonnet) | 007, 010 |
 | TASK-012 | Demo manifest `demos/index.json` read by the landing | done (main @ 62ac3ad) | 008 |
 | TASK-013 | Split `player.js` into ES modules + explicit state machine | open | 008, 012 |
 | TASK-014 | Links GitLab -> GitHub, README update, CSV provenance/licence | in_progress | 009 |
