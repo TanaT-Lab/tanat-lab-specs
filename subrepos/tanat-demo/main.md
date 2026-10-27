@@ -52,7 +52,7 @@ Adding a demo = a folder with `pipeline.py`, `demo.json`, `config.js`,
 | Content | Follows the TanaT MIMIC tutorials, no extra step. | One reference to maintain; audience sees the documented API. |
 | Code | Written once in `pipeline.py`, really executed; the player reads `outputs.json`. | What the audience sees is what ran; no hand-copied outputs to drift. |
 | Outputs | Shown as TanaT prints them; only the pipeline's own prints are tuned (3a, 5b). | Filtering TanaT's output would hide what really runs. Verbosity belongs in TanaT (issue drafted). |
-| Data | CSV in `data/`, no network at run time. | Conference rooms have bad Wi-Fi. |
+| Data | CSV in `data/`, no network at run time. Source: MIMIC-IV Clinical Database Demo 2.2 (PhysioNet), ODbL v1.0, redistributed under the same licence. | Conference rooms have bad Wi-Fi; PhysioNet is the authoritative source. |
 | Versions | `tanat==0.10.4`, `polars<2`. | An unpinned `pip install tanat` broke the demo silently; `polars<2` works around a TanaT bug (below). |
 | Clustering | Hamming on `admission_type`, normalized edit distance, 3 clusters. | Unnormalized, clusters only sorted patients by number of stays (55/7/1/1). Now: single emergency visit (22 patients), a few stays incl. deaths (24), frequent readmissions (18). |
 | Audio | Kokoro-82M, voice `af_heart`, mp3 versioned, regenerated only when the text changes. | Free, local, CPU only, reproducible from the script; replaces a manual TTS website. |
@@ -70,14 +70,10 @@ Adding a demo = a folder with `pipeline.py`, `demo.json`, `config.js`,
   back. Issue drafted for `TanaT-Lab/TanaT`, not posted yet.
 - **Start button** can appear before the demo config is loaded (shown after a
   fixed 1.5 s); harmless on a good connection.
-- **Data licence.** The Zenodo record "TanaT - MIMIC4 database" declares
-  CC-BY-4.0 while the MIMIC-IV demo it contains is ODbL v1.0 (share-alike),
-  and does not state the demo version (most likely 2.2).
 
 ## Next (backlog, by priority)
 
-1. Post the two TanaT issues (static-feature join, output verbosity); fix the
-   Zenodo record licence and version.
+1. Post the two TanaT issues (static-feature join, output verbosity).
 2. Fix the Start button race (small).
 3. Split `core/player.js` (~1100 lines) into ES modules with an explicit state
    machine, UX unchanged (TASK-013). Not before a talk.
