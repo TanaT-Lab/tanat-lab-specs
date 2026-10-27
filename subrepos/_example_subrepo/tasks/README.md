@@ -20,5 +20,6 @@ lifecycle. Each task is one file: `TASK-<NNN>-<slug>.md`.
 ## Transient exchange
 
 Intermediate exchange between orchestrator and coders goes in
-`tasks/.exchange/` - **git-ignored**, not part of the durable record. Only the
-task specs themselves (this file and `TASK-*.md`) are versioned.
+`tasks/.exchange/` - **git-ignored**, not part of the durable record. The
+`TASK-*.md` files are git-ignored too: only this board is versioned, and what
+a task teaches (decisions, findings) goes into `../main.md`.

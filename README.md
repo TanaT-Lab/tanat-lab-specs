@@ -36,15 +36,18 @@ TanaT-Lab/
    fill in `main.md`, add a row in the global `main.md`.
 2. **Task creation**: the orchestrator writes one `TASK-<NNN>-<slug>.md` in the
    sub-repo it targets, with explicit `input_contract` and `output_contract`.
+   Task files are working files on the orchestrator's machine: not versioned.
 3. **Execution**: an atomic coder works in a git worktree of the target code
    repo, fills in the result and flips `status`. Transient files go in
    `tasks/.exchange/` (git-ignored).
-4. **Tracking**: each `tasks/README.md` summarizes status; git history of
-   `TASK-*.md` is the durable trace.
+4. **Tracking**: each `tasks/README.md` summarizes status. Anything a task
+   taught that must outlive it (decision, API finding, open point) is moved
+   into the sub-repo's `main.md`; the commits of the code repo are the trace.
 
 ## Versioning
 
 - **Versioned**: `main.md`, `architecture.md`, `conventions.md`,
-  `subrepos/*/main.md`, `subrepos/*/tasks/README.md`, `subrepos/*/tasks/TASK-*.md`,
+  `subrepos/*/main.md`, `subrepos/*/tasks/README.md` (board), the task template,
   and sub-repo specific rules (e.g. `subrepos/tanat/constitution.md`).
-- **Ignored** (`.gitignore`): `.exchange/`, `logs/`, transient agent state.
+- **Ignored** (`.gitignore`): `TASK-*.md` (except the template), `.exchange/`,
+  `logs/`, transient agent state.

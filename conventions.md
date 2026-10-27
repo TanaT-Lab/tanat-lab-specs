@@ -25,7 +25,7 @@ style, no em dashes, workflow) and `subrepos/tanat/review.md`.
 
 | Term | Meaning |
 |------|---------|
-| spec | A durable, versioned description of intent or a task. |
+| spec | A durable, versioned description of intent (`main.md`, board). Task files are working contracts, not versioned. |
 | contract | The explicit input/output of a task (see task template). |
 
 ## Model-agnostic note

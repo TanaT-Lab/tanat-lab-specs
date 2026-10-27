@@ -2,11 +2,15 @@
 # specs-template .gitignore
 # Ignore anything tied to the momentary execution of a task that is NOT
 # needed to track the project's progress. Everything versioned here must
-# contribute to the durable picture of the project (main + tasks).
+# contribute to the durable picture of the project (main + task boards).
 # =====================================================================
 
+# Task files are working contracts, not versioned (the board is).
+subrepos/*/tasks/TASK-*.md
+!subrepos/_example_subrepo/tasks/TASK-000-template.md
+
 # Intermediate exchange between orchestrator and atomic coders.
-# These are transient working files, NOT the durable task specs.
+# These are transient working files.
 # (any .exchange/ anywhere, incl. subrepos/*/tasks/.exchange/)
 .exchange/
 tasks/.exchange/

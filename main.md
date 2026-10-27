@@ -45,7 +45,7 @@ Code lives in sibling repos next to this specs repo (`TanaT-Lab/<repo>`).
 | `tanat-utils` | [TanaT-Lab/tanat-utils](https://github.com/TanaT-Lab/tanat-utils) | Shared utilities for the TanaT ecosystem | `subrepos/tanat-utils/main.md` |
 | `tanat-embs` | [TanaT-Lab/tanat-embs](https://github.com/TanaT-Lab/tanat-embs) | WIP: experiments and implementation of embeddings facilities | `subrepos/tanat-embs/main.md` |
 | `tanat-synthea` | [TanaT-Lab/tanat-synthea](https://github.com/TanaT-Lab/tanat-synthea) | Synthetic patient journey datasets for longitudinal analysis | `subrepos/tanat-synthea/main.md` |
-| `tanat-demo` | `gitlab.inria.fr/tanat/comms/tanat-demo` (moving to TanaT-Lab/tanat-demo) | Narrated interactive demos of TanaT (conference showcase) | `subrepos/tanat-demo/main.md` |
+| `tanat-demo` | [TanaT-Lab/tanat-demo](https://github.com/TanaT-Lab/tanat-demo) | Narrated interactive demos of TanaT (conference showcase) | `subrepos/tanat-demo/main.md` |
 
 `subrepos/_example_subrepo/` is the template for adding a new sub-repo.
 
