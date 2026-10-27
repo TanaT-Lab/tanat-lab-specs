@@ -29,7 +29,7 @@ kept locally and **not versioned**; durable findings go in `../main.md`.
 | TASK-011 | Generate audio + automatic intro note timings | done (main @ d6f3c79, sonnet) | 007, 010 |
 | TASK-012 | Demo manifest `demos/index.json` read by the landing | done (main @ 62ac3ad) | 008 |
 | TASK-013 | Split `player.js` into ES modules + explicit state machine | open | 008, 012 |
-| TASK-014 | Links GitLab -> GitHub, README update, CSV provenance/licence | in_progress | 009 |
+| TASK-014 | Links GitLab -> GitHub, README update, CSV provenance/licence | done (main @ 34e2ba9) | 009 |
 | (option) | Split `styles.css` | open | 013 |
 
 Waves: 1 = 001-004 / 2 = 005-007 / 3 = 008-009 / 4 = 010-011 / 5 = 012-014.
