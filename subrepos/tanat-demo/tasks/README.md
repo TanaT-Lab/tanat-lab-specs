@@ -24,7 +24,7 @@ kept locally and **not versioned**; durable findings go in `../main.md`.
 | TASK-006 | Fix the two navigation bugs in `player.js` | done (main @ cb3938c) | 002 |
 | TASK-007 | `tools/tts.py`: sections -> mp3, hash cache, durations, 4m45 budget check | done (main @ 7ac0771) | 003 |
 | TASK-008 | Player reads `outputs.json`; `config.js` keeps staging only | done (main @ e74fad8) | 005, 006 |
-| TASK-009 | GitHub Actions + Pages, CI on PRs | in_progress | 004, 005 |
+| TASK-009 | GitHub Actions + Pages, CI on PRs | done (main @ b4691b2, site live) | 004, 005 |
 | TASK-010 | Rewrite `SCRIPT.md` in sections, 4m20 target, new API (incl. step 1 text) (orchestrator + human) | open | 005 |
 | TASK-011 | Generate audio + automatic intro note timings | open | 007, 010 |
 | TASK-012 | Demo manifest `demos/index.json` read by the landing | done (main @ 62ac3ad) | 008 |
@@ -34,7 +34,8 @@ kept locally and **not versioned**; durable findings go in `../main.md`.
 
 Waves: 1 = 001-004 / 2 = 005-007 / 3 = 008-009 / 4 = 010-011 / 5 = 012-014.
 Task specs are written when their wave starts, so their contracts include the
-actual outputs of the previous tasks. Waves 1-3 minus 009 are done.
+actual outputs of the previous tasks. Waves 1-3 are done; the site is live at
+https://tanat-lab.github.io/tanat-demo/ (deployed by CI from `main`).
 
 ## Transient exchange
 
