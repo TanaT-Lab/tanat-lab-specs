@@ -59,7 +59,7 @@ Adding a demo = a folder with `pipeline.py`, `demo.json`, `config.js`,
 | Duration | Under 5 min; build fails above 4 min 45 of audio. | Conference slot. |
 | Palette | `ADMISSION_COLORS` runs but is not shown. | Saves screen time. |
 | Hosting | GitHub Actions + Pages. | Repos moved to the TanaT-Lab GitHub org. |
-| Workflow | Task files not versioned (board is); reviewed task branches fast-forwarded into `main`, no PR for now. | Keep the history readable and the flow simple. |
+| Workflow | Task files not versioned (board is); one PR per task branch on GitHub, merged by the human (since 2026-11-10, TASK-015). | CI (incl. headless browser tests) runs on the PR in a clean environment; the human keeps the last word on `main`, which deploys the site. |
 
 ## Known issues
 

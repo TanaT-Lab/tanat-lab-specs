@@ -31,9 +31,9 @@ kept locally and **not versioned**; durable findings go in `../main.md`.
 | TASK-013 | Split `player.js` into ES modules + explicit state machine | open | 008, 012 |
 | TASK-014 | Links GitLab -> GitHub, README update, CSV provenance/licence | done (main @ 34e2ba9) | 009 |
 | (option) | Split `styles.css` | open | 013 |
-| TASK-015 | Frame the current step and its newest output on any screen size | open (coder) | - |
+| TASK-015 | Frame the current step and its newest output on any screen size | needs_review (PR #1) | - |
 | TASK-016 | Step 4 before/after: absolute vs aligned timeline, side by side (`columns` in staging) | backlog | 015 |
-| TASK-017 | Narration: MIMIC explained for non-specialists + step 4 before/after (orchestrator + human) | backlog | - |
+| TASK-017 | Narration: MIMIC explained for non-specialists + step 4 before/after (orchestrator + human) | done (text validated, applied by 018) | - |
 | TASK-018 | Regenerate audio, MIMIC intro note, total under 4 min 30, screenshot review | backlog | 016, 017 |
 
 Waves: 1 = 001-004 / 2 = 005-007 / 3 = 008-009 / 4 = 010-011 / 5 = 012-014 /
