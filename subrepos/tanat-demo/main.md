@@ -5,7 +5,7 @@ status: active           # draft | active | completed | archived
 version: 1.0.0
 owner: TanaT-Lab
 created: 2026-10-26
-updated: 2026-10-27
+updated: 2026-11-10
 tags: [demo, showcase, conference, static-site]
 ---
 
@@ -22,12 +22,14 @@ an audio narration. Static site, one demo today, built to host more.
 - **Scope:** demo content, player and landing page, output generation, CI and
   Pages. Not TanaT itself (`tanat`) nor dataset generation (`tanat-synthea`).
 
-## Current state (2026-10-27)
+## Current state (2026-11-10)
 
-One demo, **mimic-clustering** (MIMIC-IV hospital admissions), **3 min 32** of
-narration in 6 steps: load a CSV into a pool, bar plot, keep the 64 patients
-with an emergency admission, align on the first emergency (T0), cluster with a
-normalized edit distance (3 clusters), one timeline per cluster.
+One demo, **mimic-clustering** (MIMIC-IV hospital admissions), **4 min 00** of
+narration (~4 min 20 wall-clock) in 6 steps: load a CSV into a pool, bar plot,
+keep the 64 patients with an emergency admission, align on the first emergency
+(T0) shown as a before/after (calendar time beside aligned time), cluster with
+a normalized edit distance (3 clusters), one timeline per cluster. The intro
+explains MIMIC-IV for non-specialists (2026-11 talk feedback, TASK-015..019).
 
 How it works, in one line per piece:
 
@@ -56,7 +58,10 @@ Adding a demo = a folder with `pipeline.py`, `demo.json`, `config.js`,
 | Versions | `tanat==0.10.4`, `polars<2`. | An unpinned `pip install tanat` broke the demo silently; `polars<2` works around a TanaT bug (below). |
 | Clustering | Hamming on `admission_type`, normalized edit distance, 3 clusters. | Unnormalized, clusters only sorted patients by number of stays (55/7/1/1). Now: single emergency visit (22 patients), a few stays incl. deaths (24), frequent readmissions (18). |
 | Audio | Kokoro-82M, voice `af_heart`, mp3 versioned, regenerated only when the text changes. | Free, local, CPU only, reproducible from the script; replaces a manual TTS website. |
-| Duration | Under 5 min; build fails above 4 min 45 of audio. | Conference slot. |
+| Duration | Under 5 min; build fails above 4 min 45 of audio; target <= 4 min 30 wall-clock. | Conference slot, with margin for typing and transitions. |
+| MIMIC for non-specialists | Intro says what MIMIC-IV is (real, de-identified records, Boston, widely used) and what the open demo holds; notes repeat the key facts. | Talk feedback: the audience did not know the dataset. |
+| Alignment before/after | Step 4 draws the cohort in calendar time (TanaT default timeline), then `set_t0`, then the aligned timeline; the two figures side by side (`columns` staging field), `figsize(6, 4.5)` each. | MIMIC shifts dates per patient (2110-2210): calendar time looks scattered, which is exactly why alignment is needed. Default 10x5 figures were unreadable at half width. |
+| Framing | One rule set in `goToStation`/`typewriter`: scroll only when the typed code leaves the screen; frame each output fully once its image is decoded; at step end align the step at the top if it fits, else keep the newest output visible; never center something taller than the screen. Figures capped at 60vh. Columns stack below 1200 px. | Bad framing depending on screen/zoom (talk feedback); `test_player_framing.py` checks 1920x1080, 1280x720, 1024x576. |
 | Palette | `ADMISSION_COLORS` runs but is not shown. | Saves screen time. |
 | Hosting | GitHub Actions + Pages. | Repos moved to the TanaT-Lab GitHub org. |
 | Workflow | Task files not versioned (board is); one PR per task branch on GitHub, merged by the human (since 2026-11-10, TASK-015). | CI (incl. headless browser tests) runs on the PR in a clean environment; the human keeps the last word on `main`, which deploys the site. |
@@ -68,12 +73,20 @@ Adding a demo = a folder with `pipeline.py`, `demo.json`, `config.js`,
   position: with polars 2, cluster labels land on the wrong patients (26/64
   right). Pinned `polars<2`; `tests/test_pipeline_labels.py` fails if it comes
   back. Issue drafted for `TanaT-Lab/TanaT`, not posted yet.
+- **Legend order** differs between figures and between runs (TanaT orders
+  legend entries non-deterministically); visible on the step 4 side by side.
+  To report upstream with the verbosity issue.
+- **Fixed test ports** (8722/8723): two pytest runs at once (parallel coders)
+  collide with "Address already in use".
+- **Stale figures**: `generate_all.py` does not remove figures of blocks that
+  no longer exist in `outputs/` (local only; CI starts clean).
 - **Start button** can appear before the demo config is loaded (shown after a
   fixed 1.5 s); harmless on a good connection.
 
 ## Next (backlog, by priority)
 
-1. Post the two TanaT issues (static-feature join, output verbosity).
+1. Post the TanaT issues (static-feature join, output verbosity, legend
+   order).
 2. Fix the Start button race (small).
 3. Split `core/player.js` (~1100 lines) into ES modules with an explicit state
    machine, UX unchanged (TASK-013). Not before a talk.
@@ -81,6 +94,7 @@ Adding a demo = a folder with `pipeline.py`, `demo.json`, `config.js`,
    progress boxes in 1b and 5b.
 5. Option: split `core/styles.css`.
 6. A second demo, to prove "adding a demo = a folder".
+7. Small: tests on port 0; `generate_all.py` clears stale figures.
 
 ## Interfaces with other sub-repos
 
