@@ -32,7 +32,7 @@ kept locally and **not versioned**; durable findings go in `../main.md`.
 | TASK-014 | Links GitLab -> GitHub, README update, CSV provenance/licence | done (main @ 34e2ba9) | 009 |
 | (option) | Split `styles.css` | open | 013 |
 | TASK-015 | Frame the current step and its newest output on any screen size | done (PR #1, main @ 93ed0c1) | - |
-| TASK-016 | Step 4: calendar-time timeline before `set_t0` (pipeline + staging, stacked) | in_progress (opencode) | 015 |
+| TASK-016 | Step 4: calendar-time timeline before `set_t0` (pipeline + staging, stacked) | needs_review (PR #2) | 015 |
 | TASK-017 | Narration: MIMIC explained for non-specialists + step 4 before/after (orchestrator + human) | done (text validated, applied by 018) | - |
 | TASK-018 | Regenerate audio, MIMIC intro note, total under 4 min 30, screenshot review | backlog | 016, 017, 019 |
 | TASK-019 | Step 4 before/after side by side (`columns` in staging, stacked on narrow screens) | backlog | 016 |
