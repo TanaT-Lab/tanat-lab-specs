@@ -100,16 +100,29 @@ Adding a demo = a folder with `pipeline.py`, `demo.json`, `config.js`,
 4. Once TanaT is fixed: drop `polars<2`; once verbosity exists: quiet the
    progress boxes in 1b and 5b.
 5. Option: split `core/styles.css`.
-6. A second demo, to prove "adding a demo = a folder" (wave 8, spike
-   TASK-024 running). Decided with the human (2026-11-12): the TanaT SWoTTeD
-   tutorial, framed as **TanaT bridges tools**, not as "deep learning"
-   (SWoTTeD is a tensor decomposition trained with PyTorch). Round trip:
-   trajectories in TanaT -> `to_tensor` -> SWoTTeD patterns (figure) -> the
-   dominant pattern back into TanaT as a static feature, one timeline per
-   pattern. Card: title "From trajectories to tensors", subtitle "Turn care
-   pathways into PyTorch-ready tensors, learn temporal patterns with SWoTTeD,
-   and bring them back into TanaT."; folder `demos/swotted-patterns/`.
+6. A second demo: **swotted-patterns**, "From trajectories to tensors", in
+   review (PR #9, wave 8, TASK-024..027). See "Second demo" below.
 7. Small: tests on port 0; `generate_all.py` clears stale figures.
+
+## Second demo: swotted-patterns (2026-11-12, PR #9)
+
+TanaT as a **bridge between tools**: MIMIC-IV demo procedures -> event pool
+-> `to_tensor` -> SWoTTeD (PyTorch, CPU) learns 5 one-week patterns -> the
+dominant pattern goes back into the pool as a static feature -> one timeline
+per pattern. 84 shown lines, 6 stations, audio 3 min 17. Card: "From
+trajectories to tensors" / "To PyTorch with SWoTTeD, and back to TanaT".
+
+| Topic | Decision | Why |
+|---|---|---|
+| Framing | "TanaT bridges tools", not "deep learning". | SWoTTeD is a tensor decomposition trained with PyTorch; the honest, durable message is the round trip. |
+| Data | MIMIC-IV demo procedures (`data/mimic_procedures.csv`, + `long_title`), presented as an **illustration**, said and shown. | Spike TASK-024: patterns are at chance level across seeds on 63 patients; synthetic data was the alternative (human chose A). |
+| Tutorial fixes | Aligned on first procedure, 1-day bins, first year; `overlap_rule="max"`; 300 epochs; dominant = largest total activation + "No pattern"; top-30 by `nlargest`. | The tutorial's 365D/Tw=7 is a 7-year window, `first` drops codes, 50 epochs undertrain, `mode(argmax)` gives one pattern to all. |
+| Reproducibility | Seed + `torch.set_num_threads(1)`. | Multi-threaded sums changed the patterns between runs. |
+| Deps | `requirements-swotted.txt` (CPU torch index) + `pip install --no-deps swotted==1.0.3`. | SWoTTeD's declared deps pull CUDA torch: 6.3 GB vs 1.8 GB. Adds ~0.9 GB and ~45 s per CI run. |
+
+Known issues: `6d.png` not byte-identical between runs (TanaT draw order of
+same-day events); 6d small at 1280x720 (60vh cap); the tutorial defects above
+are to report upstream with the other TanaT issues.
 
 ## Interfaces with other sub-repos
 
