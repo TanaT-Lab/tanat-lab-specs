@@ -37,14 +37,17 @@ kept locally and **not versioned**; durable findings go in `../main.md`.
 | TASK-018 | Regenerate audio, MIMIC intro note, total under 4 min 30, screenshot review | done (PR #3) | 016, 017 |
 | TASK-019 | Step 4 before/after side by side (`columns` in staging, stacked on narrow screens) | done (PR #4, main @ 1f8847a) | 016 |
 | TASK-020 | Start button shown only when audio + figures are loaded (no fixed timer) | done (PR #5 merged) | - |
-| TASK-021 | Player controls in the header + audio progress bar + keyboard shortcuts | in review (PR #6) | 020 |
+| TASK-021 | Player controls in the header + audio progress bar + keyboard shortcuts | done (PR #6 merged) | 020 |
 | TASK-022 | Reading-line framing: typed line at a fixed height, no competing scrolls | in_progress (Claude Sonnet after 2 opencode crashes, stacked on 021) | 021 |
-| TASK-023 | Final screen: notebook (left) + clickable workflow SVG, key messages, CTA (right) | in review (PR #7, stacked on 021) | 021 |
+| TASK-024 | Spike: SWoTTeD tutorial as a second demo (data, draft pipeline, report) | in_progress | - |
+| TASK-023 | Final screen: notebook (left) + clickable workflow SVG, key messages, CTA (right) | done (PR #7 merged) | 021 |
 
 Waves: 1 = 001-004 / 2 = 005-007 / 3 = 008-009 / 4 = 010-011 / 5 = 012-014 /
 6 = 015-018 (2026-11 talk feedback: explain MIMIC, before/after alignment, framing).
 7 = 020-023 (2026-11-12 UX pass: start when ready, controls off the content,
 reading-line framing, readable final screen); sequential, all touch `core/player.js`.
+8 = 024- (2026-11-12: second demo on Deep Learning, from the TanaT SWoTTeD
+tutorial; spike first, demo tasks written from its report).
 Task specs are written when their wave starts, so their contracts include the
 actual outputs of the previous tasks. Waves 1-3 are done; the site is live at
 https://tanat-lab.github.io/tanat-demo/ (deployed by CI from `main`).
