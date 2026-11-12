@@ -76,6 +76,10 @@ Adding a demo = a folder with `pipeline.py`, `demo.json`, `config.js`,
 - **Legend order** differs between figures and between runs (TanaT orders
   legend entries non-deterministically); visible on the step 4 side by side.
   To report upstream with the verbosity issue.
+- **Flaky CI on `import tanat`.** `tanat_utils.check_version` queries PyPI
+  (timeout 0.5 s) at import and catches `URLError` but not `TimeoutError` on a
+  slow read: test collection crashes (PR #4, 2026-11-12; rerun passed). To
+  report upstream with the other TanaT issues; rerun the job meanwhile.
 - **Fixed test ports** (8722/8723): two pytest runs at once (parallel coders)
   collide with "Address already in use".
 - **Stale figures**: `generate_all.py` does not remove figures of blocks that
