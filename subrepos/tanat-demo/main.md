@@ -5,7 +5,7 @@ status: active           # draft | active | completed | archived
 version: 1.0.0
 owner: TanaT-Lab
 created: 2026-10-26
-updated: 2026-11-10
+updated: 2026-11-12
 tags: [demo, showcase, conference, static-site]
 ---
 
@@ -97,7 +97,15 @@ Adding a demo = a folder with `pipeline.py`, `demo.json`, `config.js`,
 4. Once TanaT is fixed: drop `polars<2`; once verbosity exists: quiet the
    progress boxes in 1b and 5b.
 5. Option: split `core/styles.css`.
-6. A second demo, to prove "adding a demo = a folder".
+6. A second demo, to prove "adding a demo = a folder" (wave 8, spike
+   TASK-024 running). Decided with the human (2026-11-12): the TanaT SWoTTeD
+   tutorial, framed as **TanaT bridges tools**, not as "deep learning"
+   (SWoTTeD is a tensor decomposition trained with PyTorch). Round trip:
+   trajectories in TanaT -> `to_tensor` -> SWoTTeD patterns (figure) -> the
+   dominant pattern back into TanaT as a static feature, one timeline per
+   pattern. Card: title "From trajectories to tensors", subtitle "Turn care
+   pathways into PyTorch-ready tensors, learn temporal patterns with SWoTTeD,
+   and bring them back into TanaT."; folder `demos/swotted-patterns/`.
 7. Small: tests on port 0; `generate_all.py` clears stale figures.
 
 ## Interfaces with other sub-repos
