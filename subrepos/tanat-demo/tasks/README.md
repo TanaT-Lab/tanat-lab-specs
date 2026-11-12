@@ -39,7 +39,10 @@ kept locally and **not versioned**; durable findings go in `../main.md`.
 | TASK-020 | Start button shown only when audio + figures are loaded (no fixed timer) | done (PR #5 merged) | - |
 | TASK-021 | Player controls in the header + audio progress bar + keyboard shortcuts | done (PR #6 merged) | 020 |
 | TASK-022 | Reading-line framing: typed line at a fixed height, no competing scrolls | in_progress (Claude Sonnet after 2 opencode crashes, stacked on 021) | 021 |
-| TASK-024 | Spike: SWoTTeD tutorial as a second demo (data, draft pipeline, report) | done (Sonnet; branch task/024-swotted-spike @ ae243ba, not pushed; go with changes, decision pending) | - |
+| TASK-024 | Spike: SWoTTeD tutorial as a second demo (data, draft pipeline, report) | done (Sonnet; branch task/024-swotted-spike @ ae243ba, not pushed; go with changes; human chose MIMIC as illustration) | - |
+| TASK-025 | swotted-patterns: final pipeline (6-step bridge story), card, deps + CI | in_progress (Sonnet, from the spike branch) | 024 |
+| TASK-026 | swotted-patterns: `SCRIPT.md` narration (orchestrator + human) | open | 025 |
+| TASK-027 | swotted-patterns: `config.js` staging, audio, screenshot review, PR | open | 025, 026 |
 | TASK-023 | Final screen: notebook (left) + clickable workflow SVG, key messages, CTA (right) | done (PR #7 merged) | 021 |
 
 Waves: 1 = 001-004 / 2 = 005-007 / 3 = 008-009 / 4 = 010-011 / 5 = 012-014 /
