@@ -36,8 +36,8 @@ kept locally and **not versioned**; durable findings go in `../main.md`.
 | TASK-017 | Narration: MIMIC explained for non-specialists + step 4 before/after (orchestrator + human) | done (text validated, applied by 018) | - |
 | TASK-018 | Regenerate audio, MIMIC intro note, total under 4 min 30, screenshot review | done (PR #3) | 016, 017 |
 | TASK-019 | Step 4 before/after side by side (`columns` in staging, stacked on narrow screens) | done (PR #4, main @ 1f8847a) | 016 |
-| TASK-020 | Start button shown only when audio + figures are loaded (no fixed timer) | in_progress | - |
-| TASK-021 | Player controls in the header + audio progress bar + keyboard shortcuts | open | 020 |
+| TASK-020 | Start button shown only when audio + figures are loaded (no fixed timer) | in review (PR #5) | - |
+| TASK-021 | Player controls in the header + audio progress bar + keyboard shortcuts | in_progress (stacked on 020) | 020 |
 | TASK-022 | Reading-line framing: typed line at a fixed height, no competing scrolls | open | 021 |
 | TASK-023 | Final screen: notebook (left) + clickable workflow SVG, key messages, CTA (right) | open | 022 |
 
