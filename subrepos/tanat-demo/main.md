@@ -61,7 +61,10 @@ Adding a demo = a folder with `pipeline.py`, `demo.json`, `config.js`,
 | Duration | Under 5 min; build fails above 4 min 45 of audio; target <= 4 min 30 wall-clock. | Conference slot, with margin for typing and transitions. |
 | MIMIC for non-specialists | Intro says what MIMIC-IV is (real, de-identified records, Boston, widely used) and what the open demo holds; notes repeat the key facts. | Talk feedback: the audience did not know the dataset. |
 | Alignment before/after | Step 4 draws the cohort in calendar time (TanaT default timeline), then `set_t0`, then the aligned timeline; the two figures side by side (`columns` staging field), `figsize(6, 4.5)` each. | MIMIC shifts dates per patient (2110-2210): calendar time looks scattered, which is exactly why alignment is needed. Default 10x5 figures were unreadable at half width. |
-| Framing | One rule set in `goToStation`/`typewriter`: scroll only when the typed code leaves the screen; frame each output fully once its image is decoded; at step end align the step at the top if it fits, else keep the newest output visible; never center something taller than the screen. Figures capped at 60vh. Columns stack below 1200 px. | Bad framing depending on screen/zoom (talk feedback); `test_player_framing.py` checks 1920x1080, 1280x720, 1024x576. |
+| Framing | One scroll owner (`scrollToY`, one rAF easing loop): step header at the top of the visible area at step start; the typed line kept on a reading line at 55% of the visible height (page only moves down within a block); each output framed fully once decoded; never center something taller than the screen; a manual scroll suspends auto-follow until the next block. Figures capped at 60vh. Columns stack below 1200 px. | Bad framing depending on screen/zoom, then code typed glued to the bottom edge (talk feedback, 2026-11-12: competing `scrollIntoView` calls). `test_player_framing.py` checks 1920x1080, 1280x720, 1024x576 in real time. |
+| Controls | In the fixed header on desktop (top-right corner in the intro, icon-only sticky footer on mobile), SVG icons, 3 px narration progress bar, keys Space / arrows / PageUp-PageDown / `r`. | They used to float over the code being typed; emoji render as boxes without an emoji font; a presentation clicker sends PageUp/PageDown. |
+| Start | Shown once the intro audio and every figure are loaded, after at least 0.8 s of logo, at most 8 s. | A fixed 1.5 s timer could start the intro with no sound. |
+| Final screen | `core/final-view.js`: notebook of every shown block on the left; on the right a clickable workflow of the stations (`api` staging field), last figure, `outro.takeaways` (`{lines}` computed from outputs.json), `pip install tanat` + links. | The 3x2 grid of miniatures was unreadable on a projector. |
 | Palette | `ADMISSION_COLORS` runs but is not shown. | Saves screen time. |
 | Hosting | GitHub Actions + Pages. | Repos moved to the TanaT-Lab GitHub org. |
 | Workflow | Task files not versioned (board is); one PR per task branch on GitHub, merged by the human (since 2026-11-10, TASK-015). | CI (incl. headless browser tests) runs on the PR in a clean environment; the human keeps the last word on `main`, which deploys the site. |
@@ -80,18 +83,18 @@ Adding a demo = a folder with `pipeline.py`, `demo.json`, `config.js`,
   (timeout 0.5 s) at import and catches `URLError` but not `TimeoutError` on a
   slow read: test collection crashes (PR #4, 2026-11-12; rerun passed). To
   report upstream with the other TanaT issues; rerun the job meanwhile.
-- **Fixed test ports** (8722/8723): two pytest runs at once (parallel coders)
-  collide with "Address already in use".
+- **Fixed test ports** (8721-8726): two pytest runs at once (parallel coders,
+  other sessions) collide with "Address already in use". The real-time
+  framing test (~6 min) is load-sensitive. Whole suite ~12-19 min.
 - **Stale figures**: `generate_all.py` does not remove figures of blocks that
   no longer exist in `outputs/` (local only; CI starts clean).
-- **Start button** can appear before the demo config is loaded (shown after a
-  fixed 1.5 s); harmless on a good connection.
 
 ## Next (backlog, by priority)
 
 1. Post the TanaT issues (static-feature join, output verbosity, legend
    order).
-2. Fix the Start button race (small).
+2. Faster player tests: free ports (port 0), fast typing in tests with checks
+   at block ends, so the suite runs in a few minutes and in parallel.
 3. Split `core/player.js` (~1100 lines) into ES modules with an explicit state
    machine, UX unchanged (TASK-013). Not before a talk.
 4. Once TanaT is fixed: drop `polars<2`; once verbosity exists: quiet the

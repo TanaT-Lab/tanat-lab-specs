@@ -38,7 +38,7 @@ kept locally and **not versioned**; durable findings go in `../main.md`.
 | TASK-019 | Step 4 before/after side by side (`columns` in staging, stacked on narrow screens) | done (PR #4, main @ 1f8847a) | 016 |
 | TASK-020 | Start button shown only when audio + figures are loaded (no fixed timer) | done (PR #5 merged) | - |
 | TASK-021 | Player controls in the header + audio progress bar + keyboard shortcuts | done (PR #6 merged) | 020 |
-| TASK-022 | Reading-line framing: typed line at a fixed height, no competing scrolls | in_progress (Claude Sonnet after 2 opencode crashes, stacked on 021) | 021 |
+| TASK-022 | Reading-line framing: typed line at a fixed height, no competing scrolls | in review (PR #8; Sonnet after 2 opencode crashes) | 021 |
 | TASK-024 | Spike: SWoTTeD tutorial as a second demo (data, draft pipeline, report) | done (Sonnet; branch task/024-swotted-spike @ ae243ba, not pushed; go with changes; human chose MIMIC as illustration) | - |
 | TASK-025 | swotted-patterns: final pipeline (6-step bridge story), card, deps + CI | done (Sonnet, branch task/025-swotted-pipeline @ 6f8b9f7; 84 shown lines, 63 patients) | 024 |
 | TASK-026 | swotted-patterns: `SCRIPT.md` narration (orchestrator + human) | done (496 words, plain-language pass; human delegated validation) | 025 |
