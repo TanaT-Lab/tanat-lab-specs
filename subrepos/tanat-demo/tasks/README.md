@@ -39,7 +39,7 @@ kept locally and **not versioned**; durable findings go in `../main.md`.
 | TASK-020 | Start button shown only when audio + figures are loaded (no fixed timer) | done (PR #5 merged) | - |
 | TASK-021 | Player controls in the header + audio progress bar + keyboard shortcuts | done (PR #6 merged) | 020 |
 | TASK-022 | Reading-line framing: typed line at a fixed height, no competing scrolls | in_progress (Claude Sonnet after 2 opencode crashes, stacked on 021) | 021 |
-| TASK-024 | Spike: SWoTTeD tutorial as a second demo (data, draft pipeline, report) | in_progress | - |
+| TASK-024 | Spike: SWoTTeD tutorial as a second demo (data, draft pipeline, report) | in_progress (Claude Sonnet; opencode stopped at step 1/9 after 11 min) | - |
 | TASK-023 | Final screen: notebook (left) + clickable workflow SVG, key messages, CTA (right) | done (PR #7 merged) | 021 |
 
 Waves: 1 = 001-004 / 2 = 005-007 / 3 = 008-009 / 4 = 010-011 / 5 = 012-014 /
