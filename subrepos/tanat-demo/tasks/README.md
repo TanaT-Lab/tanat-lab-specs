@@ -31,8 +31,14 @@ kept locally and **not versioned**; durable findings go in `../main.md`.
 | TASK-013 | Split `player.js` into ES modules + explicit state machine | open | 008, 012 |
 | TASK-014 | Links GitLab -> GitHub, README update, CSV provenance/licence | done (main @ 34e2ba9) | 009 |
 | (option) | Split `styles.css` | open | 013 |
+| TASK-015 | Frame the current step and its newest output on any screen size | done (PR #1, main @ 93ed0c1) | - |
+| TASK-016 | Step 4: calendar-time timeline before `set_t0` (pipeline + staging, stacked) | done (PR #2, main @ fe5556a) | 015 |
+| TASK-017 | Narration: MIMIC explained for non-specialists + step 4 before/after (orchestrator + human) | done (text validated, applied by 018) | - |
+| TASK-018 | Regenerate audio, MIMIC intro note, total under 4 min 30, screenshot review | done (PR #3) | 016, 017 |
+| TASK-019 | Step 4 before/after side by side (`columns` in staging, stacked on narrow screens) | done (PR #4, main @ 1f8847a) | 016 |
 
-Waves: 1 = 001-004 / 2 = 005-007 / 3 = 008-009 / 4 = 010-011 / 5 = 012-014.
+Waves: 1 = 001-004 / 2 = 005-007 / 3 = 008-009 / 4 = 010-011 / 5 = 012-014 /
+6 = 015-018 (2026-11 talk feedback: explain MIMIC, before/after alignment, framing).
 Task specs are written when their wave starts, so their contracts include the
 actual outputs of the previous tasks. Waves 1-3 are done; the site is live at
 https://tanat-lab.github.io/tanat-demo/ (deployed by CI from `main`).
