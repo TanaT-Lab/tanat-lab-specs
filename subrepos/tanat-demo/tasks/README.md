@@ -38,18 +38,18 @@ kept locally and **not versioned**; durable findings go in `../main.md`.
 | TASK-019 | Step 4 before/after side by side (`columns` in staging, stacked on narrow screens) | done (PR #4, main @ 1f8847a) | 016 |
 | TASK-020 | Start button shown only when audio + figures are loaded (no fixed timer) | done (PR #5 merged) | - |
 | TASK-021 | Player controls in the header + audio progress bar + keyboard shortcuts | done (PR #6 merged) | 020 |
-| TASK-022 | Reading-line framing: typed line at a fixed height, no competing scrolls | in review (PR #8; Sonnet after 2 opencode crashes) | 021 |
-| TASK-024 | Spike: SWoTTeD tutorial as a second demo (data, draft pipeline, report) | done (Sonnet; branch task/024-swotted-spike @ ae243ba, not pushed; go with changes; human chose MIMIC as illustration) | - |
-| TASK-025 | swotted-patterns: final pipeline (6-step bridge story), card, deps + CI | in review (PR #9; 84 shown lines, 63 patients) | 024 |
+| TASK-022 | Reading-line framing: typed line at a fixed height, no competing scrolls | done (PR #8 merged, main @ cf66462; Sonnet after 2 opencode crashes) | 021 |
+| TASK-024 | Spike: SWoTTeD tutorial as a second demo (data, draft pipeline, report) | done (Sonnet; go with changes, human chose MIMIC as illustration; shipped in PR #9) | - |
+| TASK-025 | swotted-patterns: final pipeline (6-step bridge story), card, deps + CI | done (PR #9 merged, main @ ad73a4a; 84 shown lines, 63 patients) | 024 |
 | TASK-026 | swotted-patterns: `SCRIPT.md` narration (orchestrator + human) | done (496 words, plain-language pass; human delegated validation) | 025 |
-| TASK-027 | swotted-patterns: `config.js` staging, audio, screenshot review, PR | in review (PR #9, audio 3 min 17) | 025, 026 |
+| TASK-027 | swotted-patterns: `config.js` staging, audio, screenshot review, PR | done (PR #9 merged, main @ ad73a4a; audio 3 min 17, live) | 025, 026 |
 | TASK-023 | Final screen: notebook (left) + clickable workflow SVG, key messages, CTA (right) | done (PR #7 merged) | 021 |
 
 Waves: 1 = 001-004 / 2 = 005-007 / 3 = 008-009 / 4 = 010-011 / 5 = 012-014 /
 6 = 015-018 (2026-11 talk feedback: explain MIMIC, before/after alignment, framing).
 7 = 020-023 (2026-11-12 UX pass: start when ready, controls off the content,
 reading-line framing, readable final screen); sequential, all touch `core/player.js`.
-8 = 024- (2026-11-12: second demo on Deep Learning, from the TanaT SWoTTeD
+8 = 024-027 (2026-11-12/13: second demo, TanaT as a bridge to learning tools, from the TanaT SWoTTeD
 tutorial; spike first, demo tasks written from its report).
 Task specs are written when their wave starts, so their contracts include the
 actual outputs of the previous tasks. Waves 1-3 are done; the site is live at

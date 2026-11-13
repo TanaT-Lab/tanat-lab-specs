@@ -5,7 +5,7 @@ status: active           # draft | active | completed | archived
 version: 1.0.0
 owner: TanaT-Lab
 created: 2026-10-26
-updated: 2026-11-12
+updated: 2026-11-13
 tags: [demo, showcase, conference, static-site]
 ---
 
@@ -13,7 +13,7 @@ tags: [demo, showcase, conference, static-site]
 
 Narrated, interactive walkthroughs of TanaT for **conference talks**: a player
 types real TanaT code step by step, shows its outputs and figures, in sync with
-an audio narration. Static site, one demo today, built to host more.
+an audio narration. Static site, two demos, adding one = a folder.
 
 - **Live:** https://tanat-lab.github.io/tanat-demo/
 - **Code:** [TanaT-Lab/tanat-demo](https://github.com/TanaT-Lab/tanat-demo)
@@ -22,14 +22,16 @@ an audio narration. Static site, one demo today, built to host more.
 - **Scope:** demo content, player and landing page, output generation, CI and
   Pages. Not TanaT itself (`tanat`) nor dataset generation (`tanat-synthea`).
 
-## Current state (2026-11-10)
+## Current state (2026-11-13)
 
-One demo, **mimic-clustering** (MIMIC-IV hospital admissions), **4 min 00** of
+Two demos, live. **mimic-clustering** (MIMIC-IV hospital admissions), **4 min 00** of
 narration (~4 min 20 wall-clock) in 6 steps: load a CSV into a pool, bar plot,
 keep the 64 patients with an emergency admission, align on the first emergency
 (T0) shown as a before/after (calendar time beside aligned time), cluster with
 a normalized edit distance (3 clusters), one timeline per cluster. The intro
 explains MIMIC-IV for non-specialists (2026-11 talk feedback, TASK-015..019).
+**swotted-patterns** ("From trajectories to tensors", 3 min 17, 6 steps):
+TanaT as a bridge to learning tools, see "Second demo" below (TASK-024..027).
 
 How it works, in one line per piece:
 
@@ -100,11 +102,11 @@ Adding a demo = a folder with `pipeline.py`, `demo.json`, `config.js`,
 4. Once TanaT is fixed: drop `polars<2`; once verbosity exists: quiet the
    progress boxes in 1b and 5b.
 5. Option: split `core/styles.css`.
-6. A second demo: **swotted-patterns**, "From trajectories to tensors", in
-   review (PR #9, wave 8, TASK-024..027). See "Second demo" below.
+6. ~~A second demo~~: done, swotted-patterns live (PR #9). Follow-ups: widen
+   `6d` for 1280x720; report the SWoTTeD tutorial defects upstream (item 1).
 7. Small: tests on port 0; `generate_all.py` clears stale figures.
 
-## Second demo: swotted-patterns (2026-11-12, PR #9)
+## Second demo: swotted-patterns (live 2026-11-13, PR #9)
 
 TanaT as a **bridge between tools**: MIMIC-IV demo procedures -> event pool
 -> `to_tensor` -> SWoTTeD (PyTorch, CPU) learns 5 one-week patterns -> the
