@@ -77,14 +77,14 @@ Adding a demo = a folder with `pipeline.py`, `demo.json`, `config.js`,
   `add_static()` LEFT JOINs without `maintain_order="left"` then writes by
   position: with polars 2, cluster labels land on the wrong patients (26/64
   right). Pinned `polars<2`; `tests/test_pipeline_labels.py` fails if it comes
-  back. Issue drafted for `TanaT-Lab/TanaT`, not posted yet.
+  back. Reported: TanaT-Lab/TanaT#15.
 - **Legend order** differs between figures and between runs (TanaT orders
   legend entries non-deterministically); visible on the step 4 side by side.
-  To report upstream with the verbosity issue.
+  Reported: TanaT-Lab/TanaT#26 (timeline iterates over `unique()` labels).
 - **Flaky CI on `import tanat`.** `tanat_utils.check_version` queries PyPI
   (timeout 0.5 s) at import and catches `URLError` but not `TimeoutError` on a
-  slow read: test collection crashes (PR #4, 2026-11-12; rerun passed). To
-  report upstream with the other TanaT issues; rerun the job meanwhile.
+  slow read: test collection crashes (PR #4, 2026-11-12; rerun passed).
+  Reported: TanaT-Lab/tanat-utils#1; rerun the job meanwhile.
 - **Fixed test ports** (8721-8726): two pytest runs at once (parallel coders,
   other sessions) collide with "Address already in use". The real-time
   framing test (~6 min) is load-sensitive. Whole suite ~12-19 min.
@@ -93,8 +93,9 @@ Adding a demo = a folder with `pipeline.py`, `demo.json`, `config.js`,
 
 ## Next (backlog, by priority)
 
-1. Post the TanaT issues (static-feature join, output verbosity, legend
-   order).
+1. Follow the upstream issues (posted 2026-11-13): TanaT#15 static join,
+   #16 verbosity, #24 `to_tensor` OHE overlap, #25 SWoTTeD tutorial, #26
+   timeline order; tanat-utils#1 import timeout.
 2. Faster player tests: free ports (port 0), fast typing in tests with checks
    at block ends, so the suite runs in a few minutes and in parallel.
 3. Split `core/player.js` (~1100 lines) into ES modules with an explicit state
@@ -103,7 +104,7 @@ Adding a demo = a folder with `pipeline.py`, `demo.json`, `config.js`,
    progress boxes in 1b and 5b.
 5. Option: split `core/styles.css`.
 6. ~~A second demo~~: done, swotted-patterns live (PR #9). Follow-ups: widen
-   `6d` for 1280x720; report the SWoTTeD tutorial defects upstream (item 1).
+   `6d` for 1280x720.
 7. Small: tests on port 0; `generate_all.py` clears stale figures.
 
 ## Second demo: swotted-patterns (live 2026-11-13, PR #9)
@@ -123,8 +124,8 @@ trajectories to tensors" / "To PyTorch with SWoTTeD, and back to TanaT".
 | Deps | `requirements-swotted.txt` (CPU torch index) + `pip install --no-deps swotted==1.0.3`. | SWoTTeD's declared deps pull CUDA torch: 6.3 GB vs 1.8 GB. Adds ~0.9 GB and ~45 s per CI run. |
 
 Known issues: `6d.png` not byte-identical between runs (TanaT draw order of
-same-day events); 6d small at 1280x720 (60vh cap); the tutorial defects above
-are to report upstream with the other TanaT issues.
+same-day events, TanaT#26); 6d small at 1280x720 (60vh cap). Tutorial defects
+reported as TanaT#25 and #24.
 
 ## Interfaces with other sub-repos
 
