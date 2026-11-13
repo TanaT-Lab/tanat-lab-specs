@@ -5,7 +5,7 @@ status: active           # draft | active | completed | archived
 version: 1.0.0
 owner: TanaT-Lab
 created: 2026-10-26
-updated: 2026-11-10
+updated: 2026-11-13
 tags: [demo, showcase, conference, static-site]
 ---
 
@@ -13,7 +13,7 @@ tags: [demo, showcase, conference, static-site]
 
 Narrated, interactive walkthroughs of TanaT for **conference talks**: a player
 types real TanaT code step by step, shows its outputs and figures, in sync with
-an audio narration. Static site, one demo today, built to host more.
+an audio narration. Static site, two demos, adding one = a folder.
 
 - **Live:** https://tanat-lab.github.io/tanat-demo/
 - **Code:** [TanaT-Lab/tanat-demo](https://github.com/TanaT-Lab/tanat-demo)
@@ -22,14 +22,16 @@ an audio narration. Static site, one demo today, built to host more.
 - **Scope:** demo content, player and landing page, output generation, CI and
   Pages. Not TanaT itself (`tanat`) nor dataset generation (`tanat-synthea`).
 
-## Current state (2026-11-10)
+## Current state (2026-11-13)
 
-One demo, **mimic-clustering** (MIMIC-IV hospital admissions), **4 min 00** of
+Two demos, live. **mimic-clustering** (MIMIC-IV hospital admissions), **4 min 00** of
 narration (~4 min 20 wall-clock) in 6 steps: load a CSV into a pool, bar plot,
 keep the 64 patients with an emergency admission, align on the first emergency
 (T0) shown as a before/after (calendar time beside aligned time), cluster with
 a normalized edit distance (3 clusters), one timeline per cluster. The intro
 explains MIMIC-IV for non-specialists (2026-11 talk feedback, TASK-015..019).
+**swotted-patterns** ("From trajectories to tensors", 3 min 17, 6 steps):
+TanaT as a bridge to learning tools, see "Second demo" below (TASK-024..027).
 
 How it works, in one line per piece:
 
@@ -61,7 +63,10 @@ Adding a demo = a folder with `pipeline.py`, `demo.json`, `config.js`,
 | Duration | Under 5 min; build fails above 4 min 45 of audio; target <= 4 min 30 wall-clock. | Conference slot, with margin for typing and transitions. |
 | MIMIC for non-specialists | Intro says what MIMIC-IV is (real, de-identified records, Boston, widely used) and what the open demo holds; notes repeat the key facts. | Talk feedback: the audience did not know the dataset. |
 | Alignment before/after | Step 4 draws the cohort in calendar time (TanaT default timeline), then `set_t0`, then the aligned timeline; the two figures side by side (`columns` staging field), `figsize(6, 4.5)` each. | MIMIC shifts dates per patient (2110-2210): calendar time looks scattered, which is exactly why alignment is needed. Default 10x5 figures were unreadable at half width. |
-| Framing | One rule set in `goToStation`/`typewriter`: scroll only when the typed code leaves the screen; frame each output fully once its image is decoded; at step end align the step at the top if it fits, else keep the newest output visible; never center something taller than the screen. Figures capped at 60vh. Columns stack below 1200 px. | Bad framing depending on screen/zoom (talk feedback); `test_player_framing.py` checks 1920x1080, 1280x720, 1024x576. |
+| Framing | One scroll owner (`scrollToY`, one rAF easing loop): step header at the top of the visible area at step start; the typed line kept on a reading line at 55% of the visible height (page only moves down within a block); each output framed fully once decoded; never center something taller than the screen; a manual scroll suspends auto-follow until the next block. Figures capped at 60vh. Columns stack below 1200 px. | Bad framing depending on screen/zoom, then code typed glued to the bottom edge (talk feedback, 2026-11-12: competing `scrollIntoView` calls). `test_player_framing.py` checks 1920x1080, 1280x720, 1024x576 in real time. |
+| Controls | In the fixed header on desktop (top-right corner in the intro, icon-only sticky footer on mobile), SVG icons, 3 px narration progress bar, keys Space / arrows / PageUp-PageDown / `r`. | They used to float over the code being typed; emoji render as boxes without an emoji font; a presentation clicker sends PageUp/PageDown. |
+| Start | Shown once the intro audio and every figure are loaded, after at least 0.8 s of logo, at most 8 s. | A fixed 1.5 s timer could start the intro with no sound. |
+| Final screen | `core/final-view.js`: notebook of every shown block on the left; on the right a clickable workflow of the stations (`api` staging field), last figure, `outro.takeaways` (`{lines}` computed from outputs.json), `pip install tanat` + links. | The 3x2 grid of miniatures was unreadable on a projector. |
 | Palette | `ADMISSION_COLORS` runs but is not shown. | Saves screen time. |
 | Hosting | GitHub Actions + Pages. | Repos moved to the TanaT-Lab GitHub org. |
 | Workflow | Task files not versioned (board is); one PR per task branch on GitHub, merged by the human (since 2026-11-10, TASK-015). | CI (incl. headless browser tests) runs on the PR in a clean environment; the human keeps the last word on `main`, which deploys the site. |
@@ -80,25 +85,46 @@ Adding a demo = a folder with `pipeline.py`, `demo.json`, `config.js`,
   (timeout 0.5 s) at import and catches `URLError` but not `TimeoutError` on a
   slow read: test collection crashes (PR #4, 2026-11-12; rerun passed). To
   report upstream with the other TanaT issues; rerun the job meanwhile.
-- **Fixed test ports** (8722/8723): two pytest runs at once (parallel coders)
-  collide with "Address already in use".
+- **Fixed test ports** (8721-8726): two pytest runs at once (parallel coders,
+  other sessions) collide with "Address already in use". The real-time
+  framing test (~6 min) is load-sensitive. Whole suite ~12-19 min.
 - **Stale figures**: `generate_all.py` does not remove figures of blocks that
   no longer exist in `outputs/` (local only; CI starts clean).
-- **Start button** can appear before the demo config is loaded (shown after a
-  fixed 1.5 s); harmless on a good connection.
 
 ## Next (backlog, by priority)
 
 1. Post the TanaT issues (static-feature join, output verbosity, legend
    order).
-2. Fix the Start button race (small).
+2. Faster player tests: free ports (port 0), fast typing in tests with checks
+   at block ends, so the suite runs in a few minutes and in parallel.
 3. Split `core/player.js` (~1100 lines) into ES modules with an explicit state
    machine, UX unchanged (TASK-013). Not before a talk.
 4. Once TanaT is fixed: drop `polars<2`; once verbosity exists: quiet the
    progress boxes in 1b and 5b.
 5. Option: split `core/styles.css`.
-6. A second demo, to prove "adding a demo = a folder".
+6. ~~A second demo~~: done, swotted-patterns live (PR #9). Follow-ups: widen
+   `6d` for 1280x720; report the SWoTTeD tutorial defects upstream (item 1).
 7. Small: tests on port 0; `generate_all.py` clears stale figures.
+
+## Second demo: swotted-patterns (live 2026-11-13, PR #9)
+
+TanaT as a **bridge between tools**: MIMIC-IV demo procedures -> event pool
+-> `to_tensor` -> SWoTTeD (PyTorch, CPU) learns 5 one-week patterns -> the
+dominant pattern goes back into the pool as a static feature -> one timeline
+per pattern. 84 shown lines, 6 stations, audio 3 min 17. Card: "From
+trajectories to tensors" / "To PyTorch with SWoTTeD, and back to TanaT".
+
+| Topic | Decision | Why |
+|---|---|---|
+| Framing | "TanaT bridges tools", not "deep learning". | SWoTTeD is a tensor decomposition trained with PyTorch; the honest, durable message is the round trip. |
+| Data | MIMIC-IV demo procedures (`data/mimic_procedures.csv`, + `long_title`), presented as an **illustration**, said and shown. | Spike TASK-024: patterns are at chance level across seeds on 63 patients; synthetic data was the alternative (human chose A). |
+| Tutorial fixes | Aligned on first procedure, 1-day bins, first year; `overlap_rule="max"`; 300 epochs; dominant = largest total activation + "No pattern"; top-30 by `nlargest`. | The tutorial's 365D/Tw=7 is a 7-year window, `first` drops codes, 50 epochs undertrain, `mode(argmax)` gives one pattern to all. |
+| Reproducibility | Seed + `torch.set_num_threads(1)`. | Multi-threaded sums changed the patterns between runs. |
+| Deps | `requirements-swotted.txt` (CPU torch index) + `pip install --no-deps swotted==1.0.3`. | SWoTTeD's declared deps pull CUDA torch: 6.3 GB vs 1.8 GB. Adds ~0.9 GB and ~45 s per CI run. |
+
+Known issues: `6d.png` not byte-identical between runs (TanaT draw order of
+same-day events); 6d small at 1280x720 (60vh cap); the tutorial defects above
+are to report upstream with the other TanaT issues.
 
 ## Interfaces with other sub-repos
 
